@@ -25,17 +25,14 @@ const cleanCSS = require('@node-minify/clean-css');
 var oMinifyJs = {
     oBundle: () => {
         mix.scripts([
-            resource_directory_js + '/utilities/array.js',
-            resource_directory_js + '/utilities/object.js',
-            resource_directory_js + '/utilities/boolean.js',
-            resource_directory_js + '/utilities/string.js',
-        ], bundle_directory_js + '/utilities.bundle.js');
-        
+            resource_directory_js + '/adminlte.js',
+        ], bundle_directory_js + '/adminlte.bundle.js');
+   
     },
     oMinify: () => {
         mix.webpackConfig({
             entry: {
-                utilities : ['@babel/polyfill/noConflict', './' + bundle_directory_js + '/launcher.bundle.js']
+                adminlte_assets: ['@babel/polyfill/noConflict', './' + bundle_directory_js + '/adminlte.bundle.js']
             },
             output: {
                 filename: '[name].min.js',
@@ -51,7 +48,7 @@ var oMinifyJs = {
             },
         });
     }
-};
+   };
 
 /**
  * npm install @node-minify/core @node-minify/clean-css
@@ -60,20 +57,18 @@ var oMinifyJs = {
 var oMinifyCss = {
     oBundle: () => {
         mix.styles([
-            resource_directory_css + '/design/alerts.css',
-            resource_directory_css + '/module/sweetalert2/sweetalert2.css',
-            resource_directory_css + '/tutorial/smart_design.css',
-        ], bundle_directory_css + '/smart_design.bundle.css');
+            resource_directory_css + '/design/adminlte.css',
+        ], bundle_directory_css + '/adminlte.bundle.css');
     },
     oMinify: () => {
         minify({
             compressor : cleanCSS,
-            input      : bundle_directory_css + '/smart_design.bundle.css',
-            output     : public_directory_css + '/smart_design.min.css',
+            input      : bundle_directory_css + '/adminlte.bundle.css',
+            output     : public_directory_css + '/adminlte_assets.min.css',
             callback   : function(err, min) {}
         });
     }
-};
+   };
 
 // oMinifyJs.oBundle();
 // oMinifyJs.oMinify();
